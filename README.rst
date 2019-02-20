@@ -23,6 +23,7 @@ Admin > Configuration Settings > Authentication
 Create a new file: $HOME/.doku.ini
 
 ::
+
    [connection]
    domain = domain.name.tld
    username = your-username
