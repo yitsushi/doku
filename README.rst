@@ -18,9 +18,9 @@ Configuration
 ~~~~~~~~~~~~~
 
 Enable XML RPC on your DokuWiki instance:
-Admin > Configuration Settings > Authentication
+:code:`Admin > Configuration Settings > Authentication`
 
-Create a new file: $HOME/.doku.ini
+Create a new file: :code:`$HOME/.doku.ini`
 
 ::
 
@@ -72,11 +72,11 @@ Example usage:
 Diary
 ~~~~~
 
-With diary commands, you can use your wiki as a diary (surprise).
+With :code:`diary` commands, you can use your wiki as a diary (surprise).
 
-The show command will show you all your logs (today).
+The :code:`show` command will show you all your logs (today).
 
-The log command will open up your $EDITOR and after save+quit,
+The :code:`log` command will open up your :code:`$EDITOR` and after save+quit,
 it will append it for your diary page (today).
 
 When you call log, doku will check all the path back and generates
