@@ -13,6 +13,9 @@ Install
 
    # or as a user
    pip install --user doku
+   
+   # upgrade
+   pip install --upgrade doku
 
 Configuration
 ~~~~~~~~~~~~~
