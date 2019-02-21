@@ -121,7 +121,7 @@ class Context:
                          (self.indexpage()),
                          p['id'])
                      ]:
-        lines.append('  * [[:{}]]'.format(page['id']))
+            lines.append('  * [[:{}]]'.format(page['id']))
 
         lines.insert(0, '====== Diary ======\n')
 
