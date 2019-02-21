@@ -51,6 +51,57 @@ def search(ctx, query):
             print(indent(content, ' ' * 4, lambda line: True))
         print()
 
+@cli.group()
+def diary():
+    pass
+
+@diary.command()
+@pass_ctx
+def show(ctx):
+    content = ctx.client.call('wiki.getPage', ctx.today())
+    if content == '':
+        print('No entries for today, yet!')
+    else:
+        print(content)
+
+@diary.command()
+@pass_ctx
+def log(ctx):
+    ctx.fill_month_view()
+    ctx.fill_year_view()
+    ctx.update_diary_root()
+    return
+
+    fp, path = tempfile.mkstemp(prefix='doku', suffix='.wiki', text=True)
+    os.close(fp)
+
+    with Popen([ctx.editor, path]) as proc:
+        proc.wait()
+
+    with open(path, 'r') as fp:
+        content = fp.read()
+        if not all(l == '' for l in content.split('\n')[-2:]):
+            content = '\n'.join([content, ''])
+
+        content = '\n'.join([
+            datetime.now().strftime('=== %r ===\n'),
+            content
+        ])
+
+        ret = ctx.client.call(
+            'dokuwiki.appendPage',
+            ctx.today(),
+            content,
+            {'sum': 'Log added with doku command line tool'}
+        )
+
+        if ret:
+            print('Document saved.')
+        else:
+            print('Something went wrong. :(')
+
+    os.remove(path)
+
 @cli.command()
 @click.argument('name')
 @pass_ctx
@@ -69,7 +120,7 @@ def edit(ctx, name):
             'wiki.putPage',
             name,
             fp.read(),
-            {'sum': 'Updated with DokuSync'}
+            {'sum': 'Updated with doku command line tool'}
         )
 
         if ret:

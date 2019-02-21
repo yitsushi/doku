@@ -31,6 +31,9 @@ Create a new file: $HOME/.doku.ini
    ssl = true
    path = /
 
+   [settings]
+   indexpage = root
+
 
 Example usage:
 ~~~~~~~~~~~~~~
@@ -65,3 +68,34 @@ Example usage:
      edit
      list
      search
+
+Diary
+~~~~~
+
+With diary commands, you can use your wiki as a diary (surprise).
+
+The show command will show you all your logs (today).
+
+The log command will open up your $EDITOR and after save+quit,
+it will append it for your diary page (today).
+
+When you call log, doku will check all the path back and generates
+content for the tree.
+
+For example:
+
+::
+
+   # Today is 2019-02-21 and your index is configured to be 'root'
+   doku diary log
+
+   # This will create the following pages if it's not exist
+   :diary:2019:02:21
+   :diary:2019:02:root
+   :diary:2019:root
+
+   # Will regenerate this page
+   # if you log an entry in a year previously was not there
+   :diary:root
+
+
