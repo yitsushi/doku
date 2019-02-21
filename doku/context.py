@@ -13,7 +13,7 @@ class Context:
     config: ConfigManager
     editor: str
     today: str
-    diary_prefix = 'diary:'
+    diary_prefix = 'diary'
     __today = None
 
     def __init__(self):

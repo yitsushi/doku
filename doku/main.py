@@ -70,7 +70,6 @@ def log(ctx):
     ctx.fill_month_view()
     ctx.fill_year_view()
     ctx.update_diary_root()
-    return
 
     fp, path = tempfile.mkstemp(prefix='doku', suffix='.wiki', text=True)
     os.close(fp)
