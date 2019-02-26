@@ -65,41 +65,56 @@ def show(ctx):
         print(content)
 
 @diary.command()
+@click.option('-p', '--pipe', is_flag=True, default=False, help='read content from stdin')
+@click.option('-c', '--code', is_flag=True, default=False, help='wraps content from stdin into <code></code> block; automatically applies --pipe')
 @pass_ctx
-def log(ctx):
+def log(ctx, pipe, code):
     ctx.fill_month_view()
     ctx.fill_year_view()
     ctx.update_diary_root()
 
-    fp, path = tempfile.mkstemp(prefix='doku', suffix='.wiki', text=True)
-    os.close(fp)
+    if code:
+        pipe = True
 
-    with Popen([ctx.editor, path]) as proc:
-        proc.wait()
+    if pipe:
+        content = click.get_text_stream('stdin').read().strip()
+        if content == '':
+            print('What? No more content!')
+            return
+        if code:
+            content = '\n'.join(['<code>', content, '</code>'])
+    else:
+        fp, path = tempfile.mkstemp(prefix='doku', suffix='.wiki', text=True)
+        os.close(fp)
 
-    with open(path, 'r') as fp:
-        content = fp.read()
-        if not all(l == '' for l in content.split('\n')[-2:]):
-            content = '\n'.join([content, ''])
+        with Popen([ctx.editor, path]) as proc:
+            proc.wait()
 
-        content = '\n'.join([
-            datetime.now().strftime('=== %r ===\n'),
-            content
-        ])
+        with open(path, 'r') as fp:
+            content = fp.read()
 
-        ret = ctx.client.call(
-            'dokuwiki.appendPage',
-            ctx.today(),
-            content,
-            {'sum': 'Log added with doku command line tool'}
-        )
+        os.remove(path)
 
-        if ret:
-            print('Document saved.')
-        else:
-            print('Something went wrong. :(')
+    if not all(l == '' for l in content.split('\n')[-2:]):
+        content = '\n'.join([content, ''])
 
-    os.remove(path)
+    content = '\n'.join([
+        datetime.now().strftime('=== %r ===\n'),
+        content
+    ])
+
+    ret = ctx.client.call(
+        'dokuwiki.appendPage',
+        ctx.today(),
+        content,
+        {'sum': 'Log added with doku command line tool'}
+    )
+
+    if ret:
+        print('Document saved.')
+    else:
+        print('Something went wrong. :(')
+
 
 @cli.command()
 @click.argument('name')

@@ -101,4 +101,11 @@ For example:
    # if you log an entry in a year previously was not there
    :diary:root
 
+   # from stdin (pipe)
+   echo 'message' | doku diary log --pipe
+
+   # decorate with <code>...</code>
+   # automatically activated the --pipe flag
+   ls -la | doku diary log --code
+
 
