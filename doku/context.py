@@ -69,7 +69,7 @@ class Context:
 
         print('Generate month view...')
         _t = self.__today
-        days = calendar.monthrange(_t.year, _t.month + 1)[1]
+        days = calendar.monthrange(_t.year, _t.month)[1]
         lines = []
         for d in range(1, days + 1, 7):
             link = partial(self.day_path, year=_t.year, month=_t.month)
