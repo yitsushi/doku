@@ -13,7 +13,7 @@ class Context:
     config: ConfigManager
     editor: str
     today: str
-    diary_prefix = 'diary'
+    diary_prefix: str
     __today = None
 
     def __init__(self):
@@ -21,6 +21,7 @@ class Context:
         self.config = ConfigManager()
         self.__new_client()
         self.__today = datetime.now()
+        self.diary_prefix = self.config.get('settings', 'diaryroot', 'diary')
 
     def __new_client(self):
         info = self.config['connection']
@@ -113,12 +114,15 @@ class Context:
             return
 
         print('Regenerate diary root...')
-        pages = self.client.call('dokuwiki.getPagelist', ':diary', [])
+        pages = self.client.call(
+            'dokuwiki.getPagelist',
+            ':{:s}'.format(self.diary_prefix),
+            [])
         lines = []
         for page in [p for p in pages
                      if re.match(
-                         r'^diary:\d{4}:%s$' %
-                         (self.indexpage()),
+                         r'^%s:\d{4}:%s$' %
+                         (self.diary_prefix, self.indexpage()),
                          p['id'])
                      ]:
             lines.append('  * [[:{}]]'.format(page['id']))

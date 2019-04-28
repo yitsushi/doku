@@ -36,7 +36,7 @@ Create a new file: :code:`$HOME/.doku.ini`
 
    [settings]
    indexpage = root
-
+   diaryroot = diary
 
 Example usage:
 ~~~~~~~~~~~~~~
