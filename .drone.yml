@@ -1,0 +1,10 @@
+---
+kind: pipeline
+name: default
+
+steps:
+  - name: tox-37
+    image: python:3.7-alpine
+    commands:
+      - pip install tox
+      - tox

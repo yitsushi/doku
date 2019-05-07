@@ -24,4 +24,3 @@ class Client:
 
     def call(self, method, *args):
         return getattr(self.__proxy, method)(*args)
-
