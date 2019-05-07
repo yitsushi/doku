@@ -1,6 +1,8 @@
 doku
 ====
 
+[![Build Status](https://drone.code-infection.com/api/badges/efertone/doku/status.svg)](https://drone.code-infection.com/efertone/doku)
+
 **doku** is a cli tool to read and manipulate
 documents in DokuWiki via its XMLRPC endpoint.
 
