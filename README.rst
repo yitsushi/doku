@@ -1,10 +1,17 @@
 doku
 ====
 
-[![Build Status](https://drone.code-infection.com/api/badges/efertone/doku/status.svg)](https://drone.code-infection.com/efertone/doku)
+.. image:: https://drone.code-infection.com/api/badges/efertone/doku/status.svg?branch=master
+    :target: https://drone.code-infection.com/efertone/doku
 
 **doku** is a cli tool to read and manipulate
 documents in DokuWiki via its XMLRPC endpoint.
+
+Requirements
+~~~~~~~~~~~~
+
+ * Python 3.6+
+ * DokuWiki access (somewhere) with enabled XML-RPC
 
 Install
 ~~~~~~~
@@ -15,7 +22,7 @@ Install
 
    # or as a user
    pip install --user doku
-   
+
    # upgrade
    pip install --upgrade doku
 
