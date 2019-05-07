@@ -1,8 +1,12 @@
 *.un~
 __pycache__
+.tox
+.coverage
 .Python
 *.egg-info/
 dist/
 build/
 .cache
 .venv/
+.pytest_cache
+.cache

@@ -15,10 +15,12 @@ Potential:
     - dokuwiki.appendPage -> Diary
 """
 
+
 @click.group()
 @click.pass_context
 def cli(ctx):
     ctx.obj = Context()
+
 
 @cli.command()
 @click.option('--namespace', default='')
@@ -29,11 +31,13 @@ def list(ctx, namespace):
         t = datetime.utcfromtimestamp(p['rev']).strftime('%Y-%m-%d %H:%M:%S')
         print('[{date}] {page}'.format(page=p['id'], date=t))
 
+
 @cli.command()
 @click.argument('name')
 @pass_ctx
 def cat(ctx, name):
     print(ctx.client.call('wiki.getPage', name))
+
 
 @cli.command()
 @click.argument('query')
@@ -51,9 +55,11 @@ def search(ctx, query):
             print(indent(content, ' ' * 4, lambda line: True))
         print()
 
+
 @cli.group()
 def diary():
     pass
+
 
 @diary.command()
 @pass_ctx
@@ -64,9 +70,21 @@ def show(ctx):
     else:
         print(content)
 
+
 @diary.command()
-@click.option('-p', '--pipe', is_flag=True, default=False, help='read content from stdin')
-@click.option('-c', '--code', is_flag=True, default=False, help='wraps content from stdin into <code></code> block; automatically applies --pipe')
+@click.option(
+    '-p',
+    '--pipe',
+    is_flag=True,
+    default=False,
+    help='read content from stdin')
+@click.option(
+    '-c',
+    '--code',
+    is_flag=True,
+    default=False,
+    help='wraps content from stdin into <code></code> block;'
+         ' automatically applies --pipe')
 @pass_ctx
 def log(ctx, pipe, code):
     ctx.fill_month_view()
@@ -95,7 +113,7 @@ def log(ctx, pipe, code):
 
         os.remove(path)
 
-    if not all(l == '' for l in content.split('\n')[-2:]):
+    if not all(line == '' for line in content.split('\n')[-2:]):
         content = '\n'.join([content, ''])
 
     content = '\n'.join([
@@ -147,4 +165,3 @@ def edit(ctx, name):
 
 if __name__ == '__main__':
     cli()
-

@@ -1,0 +1,6 @@
+flake8
+tox
+pyfakefs
+coveralls
+pytest-cov
+pytest

@@ -2,6 +2,7 @@ from configparser import ConfigParser
 from pathlib import Path
 import os
 
+
 class ConfigManager:
     __config: ConfigParser
 
@@ -26,6 +27,9 @@ class ConfigManager:
             return None
 
     def get(self, section, key, default):
+        if self.__config is None:
+            self.__load()
+
         try:
             return self.__config[section][key]
         except KeyError:

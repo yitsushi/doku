@@ -22,4 +22,3 @@ class CookiesTransport(Transport):
                 self._cookies[cookieKey] = cookieValue
         finally:
             return super().parse_response(response)
-

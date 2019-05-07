@@ -33,6 +33,12 @@ class Context:
             basepath=info.get('path', '/')
         )
 
+    def __link_month(self, month):
+        return '  * [[{}|{}]]'.format(
+                    self.month_path(self.__today.year, month),
+                    calendar.month_name[month]
+               )
+
     def indexpage(self):
         return self.config.get('settings', 'indexpage', 'index')
 
@@ -93,11 +99,7 @@ class Context:
             return
 
         print('Generate year view...')
-        link = lambda x: '  * [[{}|{}]]'.format(
-                    self.month_path(self.__today.year, x),
-                    calendar.month_name[x]
-               )
-        lines = [link(m+1) for m in range(0, 12)]
+        lines = [self.__link_month(m+1) for m in range(0, 12)]
 
         lines.insert(0, self.__today.strftime('====== %Y ======%n'))
 
@@ -135,4 +137,3 @@ class Context:
             '\n'.join(lines),
             {'sum': 'Auto-generated with doku command line tool'}
         )
-
