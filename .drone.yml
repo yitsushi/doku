@@ -1,10 +1,23 @@
 ---
 kind: pipeline
-name: default
+name: python37
 
 steps:
-  - name: tox-37
+  - name: tox
     image: python:3.7-alpine
+    group: test
     commands:
       - pip install tox
-      - tox
+      - tox -e py37,flake8
+
+---
+kind: pipeline
+name: python36
+
+steps:
+  - name: tox
+    image: python:3.6-alpine
+    group: test
+    commands:
+      - pip install tox
+      - tox -e py36,flake8
