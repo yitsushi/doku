@@ -1,8 +1,12 @@
 doku
 ====
 
-.. image:: https://drone.code-infection.com/api/badges/efertone/doku/status.svg?branch=master
-    :target: https://drone.code-infection.com/efertone/doku
+.. image:: https://travis-ci.org/yitsushi/doku.svg?branch=master
+    :target: https://travis-ci.org/yitsushi/doku
+
+.. image:: https://coveralls.io/repos/github/yitsushi/doku/badge.svg?branch=travis
+    :target: https://coveralls.io/github/yitsushi/doku?branch=travis
+
 
 **doku** is a cli tool to read and manipulate
 documents in DokuWiki via its XMLRPC endpoint.
