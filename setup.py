@@ -17,7 +17,7 @@ setup(name='doku',
       install_requires=['click'],
       classifiers=[
           "Programming Language :: Python :: 3",
-          "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+          "License :: OSI Approved :: MIT License",
           "Operating System :: OS Independent",
       ],
       entry_points="""
