@@ -36,6 +36,11 @@ Configuration
 Enable XML RPC on your DokuWiki instance:
 :code:`Admin > Configuration Settings > Authentication`
 
+Enable API access for your user:
+:code:`Admin > User Manager`
+
+Make sure your user is in the `api` group too.
+
 Create a new file: :code:`$HOME/.doku.ini`
 
 ::
